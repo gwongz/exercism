@@ -14,9 +14,6 @@ class Bob():
         elif message == message.upper():
             return self.responses["shouting"]
 
-        elif len(message) == 0:
-            return self.responses["silence"]
-
         elif message[-1] == "?":
             return self.responses["question"]
 
