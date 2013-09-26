@@ -3,7 +3,6 @@ class Beer(object):
 		self.beer = self
 
 	def verse(self, num):
-
 		bottles = {
 		'plural': str(num) + " bottles",
 		'single': str(num) + " bottle",
@@ -29,36 +28,35 @@ class Beer(object):
 						bottles['plural'], bottles['plural'], action['plural'], remainder['plural']
 						)
 
-		if num == 2:
+		elif num == 2:
 			result = 	("%s of beer on the wall, %s of beer.\n"
 						"Take %s down and pass it around, " 
 						"%s of beer on the wall.\n") % (
 						bottles['plural'], bottles['plural'], action['plural'], remainder['single']
 						)					
 
-		if num == 1:
+		elif num == 1:
 			result = 	("%s of beer on the wall, %s of beer.\n"
 						"Take %s down and pass it around, "
 						"%s of beer on the wall.\n") % (
 						bottles['single'], bottles['single'], action['single'],remainder['none']
 						)
 
-		if num == 0:
+		elif num == 0:
 			result = 	("%s of beer on the wall, %s of beer.\n"
 						"Go to the store and buy some more, "
 						"%s of beer on the wall.\n") % (
 						bottles['none'], bottles['none'].lower(), remainder['start_over']
 						)
-
-		if num < 0:
+		
+		else:
 			result = "Enter a positive number please"
 			raise SystemExit(result)
-
-
-
+		
 		return result
 
 	def sing(self, start, end=0):	
+		
 		result = []
 		num = start
 		while num >= end:
