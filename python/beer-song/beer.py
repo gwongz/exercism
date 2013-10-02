@@ -21,37 +21,36 @@ class Beer(object):
 		'start_over': '99 bottles'
 		}
 
-		if num > 2:
-			result = 	("%s of beer on the wall, %s of beer.\n"
-						"Take %s down and pass it around, " 
-						"%s of beer on the wall.\n") % (
-						bottles['plural'], bottles['plural'], action['plural'], remainder['plural']
-						)
-
-		elif num == 2:
-			result = 	("%s of beer on the wall, %s of beer.\n"
-						"Take %s down and pass it around, " 
-						"%s of beer on the wall.\n") % (
-						bottles['plural'], bottles['plural'], action['plural'], remainder['single']
-						)					
-
-		elif num == 1:
-			result = 	("%s of beer on the wall, %s of beer.\n"
-						"Take %s down and pass it around, "
-						"%s of beer on the wall.\n") % (
-						bottles['single'], bottles['single'], action['single'],remainder['none']
-						)
-
-		elif num == 0:
-			result = 	("%s of beer on the wall, %s of beer.\n"
-						"Go to the store and buy some more, "
-						"%s of beer on the wall.\n") % (
-						bottles['none'], bottles['none'].lower(), remainder['start_over']
-						)
-		
-		else:
+		if num < 0:
 			result = "Enter a positive number please"
-			raise SystemExit(result)
+			return SystemExit(result)
+
+		if num > 2:
+			bottles = bottles['plural']
+			action = action['plural']
+			remainder = remainder['plural']
+
+		if num == 2:
+			bottles = bottles['plural']
+			action = action['plural']
+			remainder = remainder['single']
+
+		if num == 1:
+			bottles = bottles['single']
+			action = action['single']
+			remainder = remainder['none']
+
+		if num == 0:
+			result = ("%s of beer on the wall, %s of beer.\n"
+					"Go to the store and buy some more, "
+					"%s of beer on the wall.\n") % (
+					bottles['none'], bottles['none'].lower(), remainder['start_over']
+					)
+		else:
+			result = ("%s of beer on the wall, %s of beer.\n"
+					"Take %s down and pass it around, "
+					"%s of beer on the wall.\n") %(bottles, bottles, action, remainder)
+
 		
 		return result
 
@@ -67,17 +66,4 @@ class Beer(object):
 		song = "".join(result)
 		return song 
 
-		
-	
 
-
-		
-
-
-
-
-
-
-		
-
-	
