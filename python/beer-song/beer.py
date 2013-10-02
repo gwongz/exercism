@@ -1,69 +1,47 @@
+from sys import exit
+
 class Beer(object):
 	def __init__(self):
 		self.beer = self
 
-	def verse(self, num):
-		bottles = {
-		'plural': str(num) + " bottles",
-		'single': str(num) + " bottle",
-		'none': "No more bottles"
-		}
-
-		action = {
-		'plural': 'one',
-		'single': 'it'
-		}
-		
-		remainder = {
-		'plural': str(num-1) + " bottles",
-		'single': str(num-1) + " bottle",
-		'none': "no more bottles",
-		'start_over': '99 bottles'
-		}
-
-		if num < 0:
-			result = "Enter a positive number please"
-			return SystemExit(result)
-
-		if num > 2:
-			bottles = bottles['plural']
-			action = action['plural']
-			remainder = remainder['plural']
-
-		if num == 2:
-			bottles = bottles['plural']
-			action = action['plural']
-			remainder = remainder['single']
-
-		if num == 1:
-			bottles = bottles['single']
-			action = action['single']
-			remainder = remainder['none']
-
-		if num == 0:
-			result = ("%s of beer on the wall, %s of beer.\n"
-					"Go to the store and buy some more, "
-					"%s of beer on the wall.\n") % (
-					bottles['none'], bottles['none'].lower(), remainder['start_over']
-					)
+	def bottles(self, beers):	
+		count = str(beers) if beers > 0 else "no more"	
+		num_bottles = " bottle" if beers == 1 else " bottles"
+		return count + num_bottles
+	
+	def action(self, beers):
+		if beers < 0:
+			exit("Enter a positive number please")
+		elif beers == 0:
+			return "Go to the store and buy some more, "
 		else:
-			result = ("%s of beer on the wall, %s of beer.\n"
-					"Take %s down and pass it around, "
-					"%s of beer on the wall.\n") %(bottles, bottles, action, remainder)
+			return "Take %s down and pass it around, "%("one" if beers > 1 else "it")
 
-		
-		return result
+	def remainder(self, beers):
+		if beers == 1:
+			return "no more"
+		return str(beers-1) if beers > 1 else "99"
 
+	def end_line(self, beers):	
+		return "%s of beer on the wall.\n" %("bottle" if beers == 2 else "bottles")
+
+	def verse(self, beers):
+		line1 = self.bottles(beers) + " of beer on the wall, "
+		line2 = self.bottles(beers) + " of beer.\n"
+		line3 = self.action(beers)
+		line4 = self.remainder(beers) + " " + self.end_line(beers)
+		return line1.capitalize() + line2 + line3 + line4
+	
 	def sing(self, start, end=0):	
-		
-		result = []
-		num = start
-		while num >= end:
-			verse = self.verse(num)
-			result.append(verse)
-			result.append('\n')
-			num -=1
-		song = "".join(result)
-		return song 
+		song = []
+		beers = start
+		while beers >= end:
+			verse = self.verse(beers)
+			song.extend([verse, '\n'])
+			beers -= 1
+		return "".join(song)
+
+
+
 
 
