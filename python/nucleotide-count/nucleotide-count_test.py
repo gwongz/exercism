@@ -43,11 +43,11 @@ class DNATest(unittest.TestCase):
             DNA("GACT").count, 'X'
         )
 
-    # def test_validates_nucleotides(self):
-    #     self.assertRaisesRegexp(
-    #         ValueError, '^. is not a nucleotide\.$',
-    #         DNA("GACT").count, 'X'
-    #     )
+    def test_validates_nucleotides(self):
+        self.assertRaisesRegexp(
+            ValueError, '^. is not a nucleotide\.$',
+            DNA("GACT").count, 'X'
+        )
 
     def test_counts_all_nucleotides(self):
         s = "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC"
