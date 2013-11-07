@@ -1,14 +1,14 @@
 class DNA:
-	def __init__(self, dna):
-		self.dna = dna 
+	def __init__(self, strand):
+		self.strand = strand 
 
 	def hamming_distance(self, mutation):
 		distance, i, j = 0, 0, 0 
 
-		for letter in self.dna:
+		for letter in self.strand:
 			if j == len(mutation):
 				break
-			elif self.dna[i] != mutation[j]:
+			elif self.strand[i] != mutation[j]:
 				distance +=1
 			i += 1
 			j += 1
