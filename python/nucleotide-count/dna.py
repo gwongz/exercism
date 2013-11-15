@@ -12,6 +12,6 @@ class DNA(object):
 	def count(self, nucleotide):
 		if nucleotide not in "ATCGU":
 			raise ValueError, ("%s is not a nucleotide." % nucleotide)
-
+			
 		counter = self.nucleotide_counts()
 		return counter[nucleotide]		
